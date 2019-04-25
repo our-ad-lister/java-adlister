@@ -17,11 +17,8 @@ public class DeleteAdServlet extends HttpServlet {
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         String hiddenParam = req.getParameter("selectedAdDelete");
         long id = Long.parseLong(hiddenParam);
-        DaoFactory.getAdsDao().deleteEntry(id, 1);
-        DaoFactory.getAdsDao().deleteEntry(id, 2);
+        DaoFactory.getAdsDao().deleteEntry(id);
         resp.sendRedirect("/profile");
     }
 }
-
-
 
