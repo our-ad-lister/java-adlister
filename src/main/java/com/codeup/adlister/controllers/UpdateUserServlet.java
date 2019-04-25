@@ -32,7 +32,7 @@ public class UpdateUserServlet extends HttpServlet {
                 req.getParameter("password")
                 );
         DaoFactory.getUsersDao().updateUser(updatedUser);
-        user = updatedUser;
+        user.setUsername(updatedUser.getUsername());
         resp.sendRedirect("profile");
     }
 }
