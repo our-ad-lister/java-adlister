@@ -27,16 +27,43 @@ public class MySQLAdsDao implements Ads {
     }
 
     @Override
+    public Ad findByID(String id) {
+        int queryId = Integer.parseInt(id);
+        String query = "SELECT * FROM ads WHERE id = ? LIMIT 1";
+        try {
+            PreparedStatement stmt = connection.prepareStatement(query);
+            stmt.setInt(1, queryId);
+            return extractAd(stmt.executeQuery());
+        } catch (SQLException e) {
+            throw new RuntimeException("Error finding an ad by id", e);
+        }
+    }
+
+    @Override
     public List<Ad> all() {
+        List<Ad> ads = new ArrayList<>();
         PreparedStatement stmt = null;
         try {
             stmt = connection.prepareStatement("SELECT * FROM ads");
             ResultSet rs = stmt.executeQuery();
-            return createAdsFromResults(rs);
+
+            while(rs.next()){
+                ads.add(
+                        new Ad(
+                                rs.getLong("id"),
+                                rs.getLong("user_id"),
+                                rs.getString("title"),
+                                rs.getString("description")
+
+                        )
+                );
+            }
+            return ads;
         } catch (SQLException e) {
             throw new RuntimeException("Error retrieving all ads.", e);
         }
     }
+
 
     @Override
     public Long insert(Ad ad) {
@@ -56,6 +83,9 @@ public class MySQLAdsDao implements Ads {
     }
 
     private Ad extractAd(ResultSet rs) throws SQLException {
+        if (! rs.next()) {
+            return null;
+        }
         return new Ad(
             rs.getLong("id"),
             rs.getLong("user_id"),
@@ -71,4 +101,38 @@ public class MySQLAdsDao implements Ads {
         }
         return ads;
     }
+
+    public List<Ad> findByUsername(int user_id) {
+        List <Ad> ads = new ArrayList<>();
+        String query = "SELECT * FROM Ads WHERE user_id = ?";
+        try {
+            PreparedStatement stmt = connection.prepareStatement(query);
+            stmt.setInt(1, user_id);
+            ResultSet rs = stmt.executeQuery();
+            while(rs.next()){
+                ads.add(
+                        new Ad(
+                                rs.getLong("id"),
+                                rs.getLong("user_id"),
+                                rs.getString("title"),
+                                rs.getString("description")
+                        )
+                );
+            }
+            return ads;
+        } catch (SQLException e) {
+            throw new RuntimeException("Error finding a user by username", e);
+        }
+    }
+
+    public static void main(String[] args) {
+        MySQLAdsDao test = new MySQLAdsDao(new Config());
+        List<Ad> ads = test.findByUsername(1);
+
+        System.out.println(ads);
+
+
+    }
+
+
 }
