@@ -17,6 +17,10 @@
                 <label for="description">Description</label>
                 <textarea id="description" name="description" class="form-control" type="text"></textarea>
             </div>
+            <div class="form-group">
+                <label for="picture">Upload Picture</label>
+                <input id="picture" name="picture" type="file" class="form-control-file" id="exampleFormControlFile1">
+            </div>
             <input type="submit" class="btn btn-block btn-primary">
         </form>
     </div>
