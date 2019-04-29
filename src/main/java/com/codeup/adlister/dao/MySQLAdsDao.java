@@ -163,36 +163,42 @@ public class MySQLAdsDao implements Ads {
         }
     }
 
+    @Override
+    public List<Ad> search(String input){
+        PreparedStatement stmt = null;
+        List<Ad> ads = new ArrayList<>();
 
 
+        try {
+            stmt = connection.prepareStatement("SELECT * FROM ads WHERE title LIKE ? OR description LIKE ?");
+            stmt.setString(1,"%"+input+"%");
+            stmt.setString(2,"%"+input+"%");
 
+            ResultSet rs = stmt.executeQuery();
 
-    public static void main(String[] args) {
-//        Config config = new Config("AEWKiu5qYTtif6jqXiYivz");
-//        Client client = new Client(config);
-//
-//// Set options and metadata for upload
-//        StorageOptions options = new StorageOptions.Builder()
-//                .mimeType("text/plain")
-//                .filename("hello.txt")
-//                .build();
-//
-//// Perform a synchronous, blocking upload
-//        FileLink file = client.upload("/path/to/file", false);
-//
-//// Perform an asynchronous, non-blocking upload
-//        Flowable<Progress<FileLink>> upload = client.uploadAsync("/path/to/file", false);
-//        upload.doOnNext(new Consumer<Progress<FileLink>>() {
-//            @Override
-//            public void accept(Progress<FileLink> progress) throws Exception {
-//                System.out.printf("%f%% uploaded\n", progress.getPercent());
-//                if (progress.getData() != null) {
-//                    FileLink file = progress.getData();
-//                }
-//            }
-//        });
+            while(rs.next()){
+                ads.add(
+                        new Ad(
+                                rs.getLong("id"),
+                                rs.getLong("user_id"),
+                                rs.getString("title"),
+                                rs.getString("description")
+                        )
+                );
+            }
+            return ads;
+
+        }catch (SQLException e){
+            throw new RuntimeException("Error retrieving search results");
+        }
 
     }
+
+
+    }
+
+
+
 
 
 }
