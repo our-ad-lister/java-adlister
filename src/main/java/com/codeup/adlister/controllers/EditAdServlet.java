@@ -1,5 +1,7 @@
 package com.codeup.adlister.controllers;
 
+import com.codeup.adlister.models.Ad;
+
 import javax.servlet.Servlet;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.ServletException;
