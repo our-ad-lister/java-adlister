@@ -7,6 +7,7 @@ public class Ad {
     private String title;
     private String description;
     private String img_url;
+    private String category;
 
     public String getImg_url() {
         return img_url;
@@ -57,5 +58,13 @@ public class Ad {
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    public String getCategory() {
+        return category;
+    }
+
+    public void setCategory(String category) {
+        this.category = category;
     }
 }
