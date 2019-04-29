@@ -1,6 +1,4 @@
 package com.codeup.adlister.dao;
-
-
 import com.codeup.adlister.models.Ad;
 import com.mysql.cj.jdbc.Driver;
 
@@ -40,6 +38,31 @@ public class MySQLAdsDao implements Ads {
         }
     }
 
+    public List<Ad> findByUserId(String id) {
+        List<Ad> userAds = new ArrayList<>();
+        int queryId = Integer.parseInt(id);
+        String query = "SELECT * FROM ads WHERE user_id = ?";
+        try {
+            PreparedStatement stmt = connection.prepareStatement(query);
+            stmt.setInt(1, queryId);
+            ResultSet rs = stmt.executeQuery();
+            while(rs.next()){
+                userAds.add(
+                        new Ad(
+                                rs.getLong("id"),
+                                rs.getLong("user_id"),
+                                rs.getString("title"),
+                                rs.getString("description"),
+                                rs.getString("img_url")
+                        )
+                );
+            }
+            return userAds;
+        } catch (SQLException e) {
+            throw new RuntimeException("Error finding an ad by id", e);
+        }
+    }
+
     @Override
     public List<Ad> all() {
         List<Ad> ads = new ArrayList<>();
@@ -54,7 +77,8 @@ public class MySQLAdsDao implements Ads {
                                 rs.getLong("id"),
                                 rs.getLong("user_id"),
                                 rs.getString("title"),
-                                rs.getString("description")
+                                rs.getString("description"),
+                                rs.getString("img_url")
 
                         )
                 );
@@ -69,11 +93,12 @@ public class MySQLAdsDao implements Ads {
     @Override
     public Long insert(Ad ad) {
         try {
-            String insertQuery = "INSERT INTO ads(user_id, title, description) VALUES (?, ?, ?)";
+            String insertQuery = "INSERT INTO ads(user_id, title, description, img_url) VALUES (?, ?, ?,?)";
             PreparedStatement stmt = connection.prepareStatement(insertQuery, Statement.RETURN_GENERATED_KEYS);
             stmt.setLong(1, ad.getUserId());
             stmt.setString(2, ad.getTitle());
             stmt.setString(3, ad.getDescription());
+            stmt.setString(4, ad.getImg_url());
             stmt.executeUpdate();
             ResultSet rs = stmt.getGeneratedKeys();
             rs.next();
@@ -91,7 +116,8 @@ public class MySQLAdsDao implements Ads {
             rs.getLong("id"),
             rs.getLong("user_id"),
             rs.getString("title"),
-            rs.getString("description")
+            rs.getString("description"),
+                rs.getString("img_url")
         );
     }
 
@@ -109,31 +135,28 @@ public class MySQLAdsDao implements Ads {
         try {
             PreparedStatement stmt = connection.prepareStatement(query);
             stmt.setInt(1, user_id);
-
-        // commented-out duplicate code below:
-
-//            ResultSet rs = stmt.executeQuery();
-//            while(rs.next()){
-//                ads.add(
-//                        new Ad(
-//                                rs.getLong("id"),
-//                                rs.getLong("user_id"),
-//                                rs.getString("title"),
-//                                rs.getString("description")
-//                        )
-//                );
-//            }
-//            return ads;
+            ResultSet rs = stmt.executeQuery();
+            while(rs.next()){
+                ads.add(
+                        new Ad(
+                                rs.getLong("id"),
+                                rs.getLong("user_id"),
+                                rs.getString("title"),
+                                rs.getString("description"),
+                                rs.getString("img_url")
+                        )
+                );
+            }
+            return ads;
 
         } catch (SQLException e) {
             throw new RuntimeException("Error finding a user by username", e);
         }
-        return ads;
+
     }
 
 
-    @Override
-    public void deleteEntry (Long ID, int queryString){
+    public void deleteEntry (Long ID){
         String query = "DELETE from ads where id = ?";
 
         try {
@@ -145,18 +168,45 @@ public class MySQLAdsDao implements Ads {
         }
     }
 
-    // make a method for updating/editing ad
+//    // make a method for updating/editing ad
 
 
 
-    public static void main(String[] args) {
-        MySQLAdsDao test = new MySQLAdsDao(new Config());
-        List<Ad> ads = test.findByUsername(1);
 
-        System.out.println(ads);
+    @Override
+    public List<Ad> search(String input){
+        PreparedStatement stmt = null;
+        List<Ad> ads = new ArrayList<>();
+
+
+
+        try {
+            stmt = connection.prepareStatement("SELECT * FROM ads WHERE title LIKE ? OR description LIKE ?");
+            stmt.setString(1,"%"+input+"%");
+            stmt.setString(2,"%"+input+"%");
+
+            ResultSet rs = stmt.executeQuery();
+
+            while(rs.next()){
+                ads.add(
+                        new Ad(
+                                rs.getLong("id"),
+                                rs.getLong("user_id"),
+                                rs.getString("title"),
+                                rs.getString("description"),
+                                rs.getString("img_url")
+                        )
+                );
+            }
+            return ads;
+
+        }catch (SQLException e){
+            throw new RuntimeException("Error retrieving search results");
+        }
+
+    }
 
 
     }
 
 
-}

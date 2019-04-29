@@ -4,8 +4,12 @@
     <jsp:include page="/WEB-INF/partials/head.jsp">
         <jsp:param name="title" value="Create a new Ad" />
     </jsp:include>
+    <script src="//static.filestackapi.com/filestack-js/2.x.x/filestack.min.js"></script>
+
 </head>
 <body>
+<jsp:include page="/WEB-INF/partials/navbar.jsp"/>
+
     <div class="container">
         <h1>Create a new Ad</h1>
         <form action="/ads/create" method="post">
@@ -17,12 +21,23 @@
                 <label for="description">Description</label>
                 <textarea id="description" name="description" class="form-control" type="text"></textarea>
             </div>
-            <div class="form-group">
-                <label for="picture">Upload Picture</label>
-                <input id="picture" name="picture" type="file" class="form-control-file" id="exampleFormControlFile1">
-            </div>
+            <input id="picture" type="button" class="btn btn-block btn-primary" name="picture" value="Upload Picture">
+            <input id="img_url" name="img_url" type="text" style="display: none">
             <input type="submit" class="btn btn-block btn-primary">
         </form>
     </div>
+
+<script>
+    document.getElementById("picture").addEventListener("click", function () {
+        var client = filestack.init('AEWKiu5qYTtif6jqXiYivz');
+        client.picker({
+            onFileUploadFinished: function(response){
+               this.value ="https://cdn.filestackcontent.com/" + (response.handle);
+               document.getElementById("img_url").value = this.value
+            }
+        }).open();
+    })
+
+</script>
 </body>
 </html>
