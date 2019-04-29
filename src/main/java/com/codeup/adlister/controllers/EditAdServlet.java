@@ -21,13 +21,13 @@ public class EditAdServlet extends HttpServlet {
     }  // doGet
 
 
-    @Override
-    protected void doPost (HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
-        Ad newAd = (Ad) request.getSession().getAttribute("adEdit");
-
-    if (!request.getParameter("title").isEmpty()) {
-        newAd.setTitle(request.getParameter("title"));
-    }
+//    @Override
+//    protected void doPost (HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
+//        Ad newAd = (Ad) request.getSession().getAttribute("adEdit");
+//
+//    if (!request.getParameter("title").isEmpty()) {
+//        newAd.setTitle(request.getParameter("title"));
+//    }
 
 
 
@@ -43,4 +43,4 @@ public class EditAdServlet extends HttpServlet {
 
 
 
-}  // EditAdServlet class
+//}  // EditAdServlet class
