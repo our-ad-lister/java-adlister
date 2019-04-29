@@ -2,7 +2,7 @@
 <html>
 <head>
     <jsp:include page="/WEB-INF/partials/head.jsp">
-        <jsp:param name="title" value="Create a new Ad" />
+        <jsp:param name="title" value="Create a new ad" />
     </jsp:include>
     <script src="//static.filestackapi.com/filestack-js/2.x.x/filestack.min.js"></script>
 

@@ -27,15 +27,15 @@ public class EditAdServlet extends HttpServlet {
     protected void doPost (HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
         Ad newAd = (Ad) request.getSession().getAttribute("adEdit");
 
-        if (!request.getParameter("title").isEmpty()) {
-            newAd.setTitle(request.getParameter("title"));
-        }
-        if (!request.getParameter("description").isEmpty()) {
-            newAd.setDescription(request.getParameter("description"));
-        }
-        if (!request.getParameter("category").isEmpty()) {
-            newAd.setCategory(request.getParameter("category"));
-        }
+//        if (!request.getParameter("title").isEmpty()) {
+//            newAd.setTitle(request.getParameter("title"));
+//        }
+//        if (!request.getParameter("description").isEmpty()) {
+//            newAd.setDescription(request.getParameter("description"));
+//        }
+//        if (!request.getParameter("category").isEmpty()) {
+//            newAd.setCategory(request.getParameter("category"));
+//        }
 
 
     } // doPost
