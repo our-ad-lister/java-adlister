@@ -145,6 +145,7 @@ public class MySQLAdsDao implements Ads {
         }
     }
 
+    // make a method for updating/editing ad
 
 
 
