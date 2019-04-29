@@ -19,6 +19,10 @@
     <p>${ad.description}</p>
 
     <a href="/ads/show?id=${ad.id}">More Information</a>
+
+        <form action="deleteAd?selectedAdDelete=${ad.id}" method="post">
+            <input type="submit"  name="selectedAdDelete" value="Delete Ad">
+        </form>
     </div>
 </c:forEach>
 
