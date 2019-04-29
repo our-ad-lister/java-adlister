@@ -8,13 +8,14 @@
         <ul class="nav navbar-nav navbar-right">
             <c:if test= "${sessionScope.user == null}">
                 <li><a href="/login">Login</a></li>
+                <li><a href="/register">Sign Up</a></li>
             </c:if>
             <c:if test= "${sessionScope.user != null}">
                 <li><a href="/logout">Logout</a></li>
             </c:if>
         </ul>
-        <form class="form-inline my-2 my-lg-0">
-            <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+        <form class="form-inline my-2 my-lg-0" method="get" action="search">
+            <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" name="search">
             <button class="btn my-2 my-sm-0" type="submit">Search</button>
         </form>
     </div><!-- /.navbar-collapse -->

@@ -139,6 +139,38 @@ public class MySQLAdsDao implements Ads {
         }
     }
 
+    @Override
+    public List<Ad> search(String input){
+        PreparedStatement stmt = null;
+        List<Ad> ads = new ArrayList<>();
+
+
+        try {
+            stmt = connection.prepareStatement("SELECT * FROM ads WHERE title LIKE ? OR description LIKE ?");
+            stmt.setString(1,"%"+input+"%");
+            stmt.setString(2,"%"+input+"%");
+
+            ResultSet rs = stmt.executeQuery();
+
+            while(rs.next()){
+                ads.add(
+                        new Ad(
+                                rs.getLong("id"),
+                                rs.getLong("user_id"),
+                                rs.getString("title"),
+                                rs.getString("description")
+                        )
+                );
+            }
+            return ads;
+
+        }catch (SQLException e){
+            throw new RuntimeException("Error retrieving search results");
+        }
+
+    }
+
+
 
 
 
@@ -147,8 +179,16 @@ public class MySQLAdsDao implements Ads {
         Ad ad = test.findByID("4");
         System.out.println(ad.getUserId());
 
+//       List<Ad> results = test.search("hyper");
+//
+//       for (Ad ad : results){
+//           System.out.println(ad.getTitle() + ad.getDescription());
+//       }
 
     }
+
+
+
 
 
 }
