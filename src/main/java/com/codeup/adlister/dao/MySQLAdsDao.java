@@ -204,19 +204,6 @@ public class MySQLAdsDao implements Ads {
     }
 
 
-//    public static void main(String[] args) {
-//        MySQLAdsDao test = new MySQLAdsDao(new Config());
-//
-//
-//        List<Ad> results = test.search("hyper");
-//
-//        for (Ad ad : results) {
-//            System.out.println(ad.getTitle() + ad.getDescription());
-//        }
-//    }
-
-
-
     }
 
 
