@@ -168,10 +168,16 @@ public class MySQLAdsDao implements Ads {
         }
     }
 
+//    // make a method for updating/editing ad
+
+
+
+
     @Override
     public List<Ad> search(String input){
         PreparedStatement stmt = null;
         List<Ad> ads = new ArrayList<>();
+
 
 
         try {
