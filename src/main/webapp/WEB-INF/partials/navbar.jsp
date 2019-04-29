@@ -14,8 +14,8 @@
                 <li><a href="/profile">View Profile</a></li>
                 <li><a href="/update">Profile Settings</a></li>
                 <li><a href="/ads/create">Create Ad</a></li>
-                <li> <form class="form-inline my-2 my-lg-0">
-                    <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+                <li> <form class="form-inline my-2 my-lg-0" method="get" action="search">
+                    <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" name="search">
                     <button class="btn my-2 my-sm-0" type="submit">Search</button>
                 </form></li>
                 <li><a href="/logout">Logout</a></li>
