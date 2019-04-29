@@ -170,6 +170,12 @@ public class MySQLAdsDao implements Ads {
 
 //    // make a method for updating/editing ad
 
+    public void editAd (String[] args) {
+
+    }
+
+
+
 
 
 

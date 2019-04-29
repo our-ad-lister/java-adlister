@@ -10,7 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.lang.String;
-
+import java.util.Arrays;
 
 @WebServlet(urlPatterns = "/editAd")
 public class EditAdServlet extends HttpServlet {
@@ -30,20 +30,17 @@ public class EditAdServlet extends HttpServlet {
         if (!request.getParameter("title").isEmpty()) {
             newAd.setTitle(request.getParameter("title"));
         }
-
-
-
-
+        if (!request.getParameter("description").isEmpty()) {
+            newAd.setDescription(request.getParameter("description"));
+        }
+        if (!request.getParameter("category").isEmpty()) {
+            newAd.setCategory(request.getParameter("category"));
+        }
 
 
     } // doPost
 
-    }  // EditAdServlet class
+} // EditAdServlet class
 
 
 
-
-
-
-
-//}  // EditAdServlet class
