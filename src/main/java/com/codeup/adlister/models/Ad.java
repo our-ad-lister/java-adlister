@@ -1,6 +1,7 @@
 package com.codeup.adlister.models;
 
 public class Ad {
+
     private long id;
     private long user_id;
     private String title;
