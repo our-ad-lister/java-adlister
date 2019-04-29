@@ -38,6 +38,30 @@ public class MySQLAdsDao implements Ads {
         }
     }
 
+    public List<Ad> findByUserId(String id) {
+        List<Ad> userAds = new ArrayList<>();
+        int queryId = Integer.parseInt(id);
+        String query = "SELECT * FROM ads WHERE user_id = ?";
+        try {
+            PreparedStatement stmt = connection.prepareStatement(query);
+            stmt.setInt(1, queryId);
+            ResultSet rs = stmt.executeQuery();
+            while(rs.next()){
+                userAds.add(
+                        new Ad(
+                                rs.getLong("id"),
+                                rs.getLong("user_id"),
+                                rs.getString("title"),
+                                rs.getString("description")
+                        )
+                );
+            }
+            return userAds;
+        } catch (SQLException e) {
+            throw new RuntimeException("Error finding an ad by id", e);
+        }
+    }
+
     @Override
     public List<Ad> all() {
         List<Ad> ads = new ArrayList<>();
@@ -142,11 +166,31 @@ public class MySQLAdsDao implements Ads {
 
 
 
-    public static void main(String[] args) {
-        MySQLAdsDao test = new MySQLAdsDao(new Config());
-        Ad ad = test.findByID("4");
-        System.out.println(ad.getUserId());
 
+    public static void main(String[] args) {
+//        Config config = new Config("AEWKiu5qYTtif6jqXiYivz");
+//        Client client = new Client(config);
+//
+//// Set options and metadata for upload
+//        StorageOptions options = new StorageOptions.Builder()
+//                .mimeType("text/plain")
+//                .filename("hello.txt")
+//                .build();
+//
+//// Perform a synchronous, blocking upload
+//        FileLink file = client.upload("/path/to/file", false);
+//
+//// Perform an asynchronous, non-blocking upload
+//        Flowable<Progress<FileLink>> upload = client.uploadAsync("/path/to/file", false);
+//        upload.doOnNext(new Consumer<Progress<FileLink>>() {
+//            @Override
+//            public void accept(Progress<FileLink> progress) throws Exception {
+//                System.out.printf("%f%% uploaded\n", progress.getPercent());
+//                if (progress.getData() != null) {
+//                    FileLink file = progress.getData();
+//                }
+//            }
+//        });
 
     }
 
