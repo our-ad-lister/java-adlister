@@ -18,6 +18,7 @@
 
     <h1>${seller.username}</h1>
     <h2>${seller.email}</h2>
+    <a href="all?seller=${seller.id}">View all Ad's from this seller</a>
 
 </body>
 </html>
