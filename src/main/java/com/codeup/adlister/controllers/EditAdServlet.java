@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.lang.String;
 
 
 @WebServlet(urlPatterns = "/editAd")
@@ -21,21 +22,23 @@ public class EditAdServlet extends HttpServlet {
     }  // doGet
 
 
-//    @Override
-//    protected void doPost (HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
-//        Ad newAd = (Ad) request.getSession().getAttribute("adEdit");
-//
-//    if (!request.getParameter("title").isEmpty()) {
-//        newAd.setTitle(request.getParameter("title"));
-//    }
+
+    @Override
+    protected void doPost (HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
+        Ad newAd = (Ad) request.getSession().getAttribute("adEdit");
+
+        if (!request.getParameter("title").isEmpty()) {
+            newAd.setTitle(request.getParameter("title"));
+        }
 
 
 
 
 
 
+    } // doPost
 
-    }  // doPost
+    }  // EditAdServlet class
 
 
 
