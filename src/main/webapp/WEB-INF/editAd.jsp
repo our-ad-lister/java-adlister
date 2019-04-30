@@ -14,23 +14,18 @@
 
     <body>
         <jsp:include page="/WEB-INF/partials/navbar.jsp" />
-
-        <div class="container">
-            <div class="text-center grid">
-                <div class="width-1-1">
-                    <div class="card card-secondary card-body">
-
-                        <form action="" method="POST">
-                            <div class="width-1-2">
-                                <div class="width-xlarge margin-medium-bottom">
-                                    <input class="input form-width-large" type="text" name="title" placeholder="${sessionScope.adEdit.title}">
-                                </div>
-                            </div>
-                        </form>
-                    </div>
-                </div>
+        <form method="post" action="editAd">
+            <div class="form-group">
+                <label for="title">Title</label>
+                <input id="title" value="${ad.title}" name="title" class="form-control" type="text">
             </div>
-        </div>  <!-- container -->
+            <div class="form-group">
+                <label for="description">Description</label>
+                <input id="description" value="${ad.description}" name="description" class="form-control" type="text">
+            </div>
+            <button name="id" value="${ad.id}">Update</button>
+        </form>
+         <!-- container -->
 
 
     </body>

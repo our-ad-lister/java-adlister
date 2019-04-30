@@ -17,5 +17,5 @@ public interface Ads {
     void deleteEntry (Long ID);
     List<Ad> findByUserId(String id);
     List<Ad>search(String input);
-    void editAd (Ad ad);
+    void editAd (long id, String title, String description);
 }

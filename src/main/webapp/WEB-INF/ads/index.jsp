@@ -16,7 +16,7 @@
 
     <c:forEach var="ad" items="${ads}">
         <div class="col-md-6">
-            <c:if test="${ad.img_url != null}">
+            <c:if test="${ad.img_url.length() > 0}">
             <img src="${ad.img_url}" alt="picture" width="300" height="300">
             </c:if>
             <h2>${ad.title}</h2>
