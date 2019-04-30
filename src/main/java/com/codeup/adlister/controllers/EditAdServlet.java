@@ -1,5 +1,6 @@
 package com.codeup.adlister.controllers;
 
+import com.codeup.adlister.dao.DaoFactory;
 import com.codeup.adlister.models.Ad;
 
 import javax.servlet.Servlet;
@@ -11,6 +12,9 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.lang.String;
 import java.util.Arrays;
+import static com.codeup.adlister.dao.DaoFactory.*;
+
+
 
 @WebServlet(urlPatterns = "/editAd")
 public class EditAdServlet extends HttpServlet {
@@ -36,6 +40,7 @@ public class EditAdServlet extends HttpServlet {
 //        if (!request.getParameter("category").isEmpty()) {
 //            newAd.setCategory(request.getParameter("category"));
 //        }
+
 
 
     } // doPost
