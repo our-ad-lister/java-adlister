@@ -10,6 +10,7 @@
     <jsp:include page="/WEB-INF/partials/navbar.jsp" />
     <div class="container">
         <h1>Welcome to the SpaceJunk Lister!</h1>
+                <img src="/img/listerBanner2.png">
     </div>
 </body>
 </html>
