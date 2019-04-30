@@ -8,7 +8,6 @@
         <jsp:include page="/WEB-INF/partials/head.jsp">
             <jsp:param name="title" value="Your Profile" />
         </jsp:include>
-        <%--<jsp:include page="/WEB-INF/partials/scripts.jsp" >> MAKE scripts.js file/>--%>
     </head>
 
 
@@ -24,6 +23,9 @@
                             <div class="width-1-2">
                                 <div class="width-xlarge margin-medium-bottom">
                                     <input class="input form-width-large" type="text" name="title" placeholder="${sessionScope.adEdit.title}">
+                                    <div class="uk-width-1-1">
+                                        <button type="submit" class="button button-default margin-small-top">Submit</button>
+                                    </div>
                                 </div>
                             </div>
                         </form>
