@@ -192,12 +192,12 @@ public class MySQLAdsDao implements Ads {
         PreparedStatement stmt = null;
         List<Ad> ads = new ArrayList<>();
 
-
+        String lowerInput = input.toLowerCase();
 
         try {
             stmt = connection.prepareStatement("SELECT * FROM ads WHERE title LIKE ? OR description LIKE ?");
-            stmt.setString(1,"%"+input+"%");
-            stmt.setString(2,"%"+input+"%");
+            stmt.setString(1,"%"+lowerInput+"%");
+            stmt.setString(2,"%"+lowerInput+"%");
 
             ResultSet rs = stmt.executeQuery();
 
