@@ -22,7 +22,7 @@
                 <textarea id="description" name="description" class="form-control" type="text"></textarea>
             </div>
             <input id="picture" type="button" class="btn btn-block btn-primary" name="picture" value="Upload Picture">
-            <input id="img_url" name="img_url" type="text" style="display: none">
+            <input id="img_url" name="img_url" type="text" style="visibility: hidden">
             <input type="submit" class="btn btn-block btn-primary">
         </form>
     </div>

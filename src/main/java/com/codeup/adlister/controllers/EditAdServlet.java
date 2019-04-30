@@ -16,12 +16,14 @@ import static com.codeup.adlister.dao.DaoFactory.*;
 
 
 
-@WebServlet(urlPatterns = "/editAd")
+@WebServlet(name = "controllers.EditAdServlet", urlPatterns = "/editAd")
 public class EditAdServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        request.getSession().getAttribute("adEdit");
+        String edit = request.getParameter("selectedAdEdit");
+        System.out.println(edit);
+        request.setAttribute("ad", DaoFactory.getAdsDao().findByID(edit));
         request.getRequestDispatcher("/WEB-INF/editAd.jsp").forward(request, response);
     }  // doGet
 
@@ -29,7 +31,14 @@ public class EditAdServlet extends HttpServlet {
 
     @Override
     protected void doPost (HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
-        Ad newAd = (Ad) request.getSession().getAttribute("adEdit");
+//        Ad newAd = (Ad) request.getSession().getAttribute("adEdit");
+        String ad_id = request.getParameter("id");
+        Long id = Long.parseLong(ad_id);
+        String title = request.getParameter("title");
+        String description = request.getParameter("description");
+
+        DaoFactory.getAdsDao().editAd(id,title, description);
+        response.sendRedirect("/profile");
 
 //        if (!request.getParameter("title").isEmpty()) {
 //            newAd.setTitle(request.getParameter("title"));
