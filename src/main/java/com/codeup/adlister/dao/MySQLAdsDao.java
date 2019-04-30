@@ -5,6 +5,9 @@ import com.mysql.cj.jdbc.Driver;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
+import java.lang.String;
+import java.sql.SQLException;
+
 
 public class MySQLAdsDao implements Ads {
     private Connection connection = null;
@@ -56,7 +59,7 @@ public class MySQLAdsDao implements Ads {
             }
             return userAds;
         } catch (SQLException e) {
-            throw new RuntimeException("Error finding an ad by id", e);
+            throw new RuntimeException("Error finding user by id", e);
         }
     }
 
@@ -161,11 +164,25 @@ public class MySQLAdsDao implements Ads {
             stmt.setLong(1, ID);
             stmt.executeUpdate();
         } catch (SQLException e) {
-            throw new RuntimeException("Error updating your ad.", e);
+            throw new RuntimeException("Error deleting your ad.", e);
         }
     }
 
-//    // make a method for updating/editing ad
+
+
+    public void editAd (Ad ad) {
+        String query = "UPDATE ads SET title = ?, description = ? where id = ?";
+        try {
+            PreparedStatement stmt = connection.prepareStatement(query);
+            stmt.setLong(1, ad.getId());
+            stmt.setString(2, ad.getTitle());
+            stmt.setString(3, ad.getDescription());
+            stmt.executeUpdate();
+        } catch (SQLException e) {
+            throw new RuntimeException("There has been an error updating your ad.");
+        }
+
+    } // editAd
 
 
 
